@@ -3,7 +3,7 @@
 namespace Tests;
 
 use PHPUnit\Framework\TestCase;
-use swkberlin\Kata;
+use swkberlin\Game;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -13,7 +13,7 @@ class KataTest extends TestCase
 
     public function testDummy()
     {
-        $kata = new Kata();
+        $kata = new Game();
         $this->assertTrue(false);
     }
 
