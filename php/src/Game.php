@@ -1,7 +1,8 @@
 <?php
 
-namespace swkberlin;
+declare(strict_types =1);
 
+namespace swkberlin;
 
 use swkberlin\Calculation\CalculationInterface;
 use swkberlin\Rolls\SpareRoll;

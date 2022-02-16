@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types =1);
+
 namespace swkberlin\Rolls;
 
 use swkberlin\Calculation\CalculationInterface;
