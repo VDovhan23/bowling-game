@@ -2,17 +2,23 @@
 
 namespace swkberlin;
 
+
+use swkberlin\Calculation\CalculationInterface;
+use swkberlin\Rolls\SpareRoll;
+use swkberlin\Rolls\StrikeRoll;
+
 class Game
 {
-    const FRAMES = 10;
+    public function __construct(private CalculationInterface $calculator)
+    {
+    }
 
-    protected array $rolls = [];
+    const FRAMES = 10;
 
     public function roll(int $skittles): void
     {
-        $this->rolls[] = $skittles;
+        $this->calculator->rolls[] = $skittles;
     }
-
 
     public function score()
     {
@@ -21,17 +27,22 @@ class Game
 
         foreach (range(1, self::FRAMES) as $frame){
             if ($this->isStrikeRoll($roll)){
-                $score += $this->throwCount($roll) + $this->strikeBonus($roll);
+                $strikeRoll = new StrikeRoll($this->calculator);
+
+                $score += $this->calculator->throwCount($roll) + $strikeRoll->bonus($roll);
 
                 $roll += 1;
 
                 continue;
             }
 
-            $score += $this->calculateFrameScore($roll);
+            $score += $this->calculator->calculateFrameScore($roll);
 
-            if ($this->isStrikeRoll($roll)) {
-                $score += $this->spareBonus($roll);
+            if ($this->isSpareRoll($roll)) {
+
+                $spareRoll = new SpareRoll($this->calculator);
+
+                $score += $spareRoll->bonus($roll);
             }
 
             $roll+= 2;
@@ -41,36 +52,15 @@ class Game
         return $score;
     }
 
-    protected function throwCount(int $roll): int
-    {
-        return $this->rolls[$roll];
-    }
-
-    protected function calculateFrameScore(int $roll): int
-    {
-        return $this->throwCount($roll) + $this->throwCount($roll + 1);
-    }
-
 
     protected function isStrikeRoll(int $roll): bool
     {
-        return $this->throwCount($roll) === 10;
+        return $this->calculator->throwCount($roll) === 10;
     }
 
     protected function isSpareRoll(int $roll): bool
     {
-        return $this->calculateFrameScore($roll) === 10;
-    }
-
-
-    protected function spareBonus(int $roll): int
-    {
-        return $this->throwCount($roll + 2);
-    }
-
-    protected function strikeBonus(int $roll): int
-    {
-        return $this->throwCount($roll + 1) + $this->throwCount($roll + 2);
+        return $this->calculator->calculateFrameScore($roll) === 10;
     }
 
 }

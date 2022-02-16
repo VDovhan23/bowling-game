@@ -1,1 +1,1 @@
-{"version":1,"defects":{"Tests\\KataTest::testDummy":3},"times":{"Tests\\KataTest::testDummy":0.003,"Tests\\KataTest::testNotFailing":0.004}}
+{"version":1,"defects":{"Tests\\KataTest::testDummy":3,"Tests\\KataTest::it_scores_a_perfect_game":4,"Tests\\KataTest::it_scores_a_gutter_game_as_zero":4},"times":{"Tests\\KataTest::testDummy":0.132,"Tests\\KataTest::testNotFailing":0.002,"Tests\\KataTest::it_scores_a_perfect_game":0.012,"Tests\\KataTest::it_scores_a_gutter_game_as_zero":0.003,"Tests\\KataTest::test_is_a_perfect_game":0.003,"Tests\\KataTest::test_is_a_bad_game":0}}
